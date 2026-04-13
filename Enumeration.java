@@ -1,20 +1,26 @@
-Public enum PriorityLevel{
-LOW,
-MEDIUM,
-HIGH,
-CRITICAL,
+public enum PriorityLevel {
+    LOW,
+    MEDIUM,
+    HIGH,
+    CRITICAL
 }
 
-Public enum TaskStatuts{
+public enum TaskStatus {
     TODO,
     BLOCKED,
     IN_PROGRESS,
     DONE
 }
 
-Public enum TaskCategory{
+public enum TaskCategory {
     BUGFIX,
     FEATURE,
     DOCUMENTATION,
-    RESEARCH,
+    RESEARCH
+}
+
+public enum NotificationType {
+    SMS,
+    EMAIL,
+    CONSOLE
 }
