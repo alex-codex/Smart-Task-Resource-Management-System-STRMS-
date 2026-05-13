@@ -7,7 +7,7 @@ public class Main {
         Engineer engineer = new Engineer("charlie", "Charlie", "charlie@eseo.fr", "eng123");
 
         System.out.println("=== Utilisateurs créés ===");
-        System.out.println(admin);
+      /*  System.out.println(admin);
         System.out.println(manager);
         System.out.println(engineer);
 
@@ -51,5 +51,5 @@ public class Main {
         NotificationManager.send(NotificationType.EMAIL, "Une tâche a été créée pour l'ingénieur Charlie");
 
         System.out.println("\n=== Système initialisé avec succès ===");
-    }
+    }*/
 }
