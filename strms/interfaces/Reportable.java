@@ -1,3 +1,5 @@
+package strms.interfaces;
+
 /**
  * Interface définissant le contrat pour la génération de rapports.
  * Toute classe capable de produire un rapport doit implémenter cette interface.

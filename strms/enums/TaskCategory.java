@@ -1,3 +1,5 @@
+package strms.enums;
+
 public enum TaskCategory {
     BUGFIX,
     FEATURE,
