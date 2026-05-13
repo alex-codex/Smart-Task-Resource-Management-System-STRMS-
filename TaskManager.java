@@ -157,6 +157,17 @@ public class TaskManager {
     }
 
     /**
+     * Simplified addTask for basic testing without permission checks.
+     * @param task the task to add
+     */
+    public void addTask(Task task) {
+        if (!tasks.containsKey(task.getTaskId())) {
+            tasks.put(task.getTaskId(), task);
+            readyQueue.offer(task);
+        }
+    }
+
+    /**
      * Removes a task from the system.
      *
      * Rules enforced:

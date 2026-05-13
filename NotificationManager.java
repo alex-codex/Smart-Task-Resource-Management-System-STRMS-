@@ -39,4 +39,28 @@ public class NotificationManager {
 
         System.out.println("[BROADCAST] " + message);
     }
+
+    /**
+     * Envoie une notification simple avec un type donné.
+     */
+    public static void send(NotificationType type, String message) {
+        if (message == null || type == null) {
+            return;
+        }
+
+        switch (type) {
+            case CONSOLE:
+                System.out.println("[NOTIFICATION] " + message);
+                break;
+            case EMAIL:
+                System.out.println("[EMAIL] " + message);
+                break;
+            case SMS:
+                System.out.println("[SMS] " + message);
+                break;
+            default:
+                System.out.println("[NOTIFICATION] " + message);
+                break;
+        }
+    }
 }

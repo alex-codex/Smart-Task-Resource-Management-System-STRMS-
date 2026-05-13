@@ -34,6 +34,19 @@ public class Task {
         this.history = new ArrayList<>();
     }
 
+    public Task(String title, String description, PriorityLevel priorityLevel, TaskCategory category) {
+        this.taskId = generateTaskId();
+        this.Title = title;
+        this.description = description;
+        this.priorityLevel = priorityLevel;
+        this.category = category;
+        this.status = TaskStatus.TODO;
+        this.deadline = LocalDate.now().plusDays(7);
+        this.assignedEngineer = null;
+        this.dependencies = new ArrayList<>();
+        this.history = new ArrayList<>();
+    }
+
     public void updateStatus(TaskStatus status, User user) {
         this.status = status;
         addHistoryEntry("Status updated to " + status, user);
@@ -90,6 +103,10 @@ public class Task {
     }
 
     public String getTaskId() {
+        return taskId;
+    }
+
+    public String getId() {
         return taskId;
     }
 
@@ -159,5 +176,52 @@ public class Task {
 
     public List<TaskHistoryEntry> getHistory() {
         return history;
+    }
+
+    public void assignTo(Engineer engineer) {
+        this.assignedEngineer = engineer;
+    }
+
+    public Engineer getAssignee() {
+        return assignedEngineer;
+    }
+
+    private static String generateTaskId() {
+        return "TASK-" + System.currentTimeMillis();
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId='" + taskId + '\'' +
+                ", title='" + Title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", category=" + category +
+                ", priorityLevel=" + priorityLevel +
+                ", assignedEngineer=" + (assignedEngineer != null ? assignedEngineer.getName() : "None") +
+                "}";
+    }
+
+    public String toFileString() {
+        String engineerId = assignedEngineer != null ? assignedEngineer.getId() : "NONE";
+        return taskId + "|" + Title + "|" + description + "|" + status + "|" + category + "|" 
+               + (deadline != null ? deadline.toString() : "NONE") + "|" + priorityLevel + "|" + engineerId;
+    }
+
+    public static Task fromFileString(String fileString) {
+        String[] parts = fileString.split("\\|", 8);
+        if (parts.length < 8) {
+            return null;
+        }
+        Task task = new Task();
+        task.taskId = parts[0];
+        task.Title = parts[1];
+        task.description = parts[2];
+        task.status = TaskStatus.valueOf(parts[3]);
+        task.category = TaskCategory.valueOf(parts[4]);
+        task.deadline = !parts[5].equals("NONE") ? java.time.LocalDate.parse(parts[5]) : null;
+        task.priorityLevel = PriorityLevel.valueOf(parts[6]);
+        return task;
     }
 }
